@@ -1,0 +1,12 @@
+@import "styleBrowser.scss";
+
+.wrapper {
+	background-color: white;
+	min-height: 685px;
+	display: flex;
+	flex-direction: column;
+}
+
+.markdown {
+	margin: 0px 40px 0px 15px;
+}

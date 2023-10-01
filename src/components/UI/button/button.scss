@@ -1,0 +1,16 @@
+@import '../../app/vars';
+
+.btn {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 10px 8px;
+	background: white;
+	border-radius: 5px;
+	text-transform: uppercase;
+
+	&_green {
+		color: $colorGreen;
+		border: 1px solid $colorGreen;
+	}
+}

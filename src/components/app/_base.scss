@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Roboto:wght@400;500&display=swap');
+
+
+.wrapper {
+	min-height: 100vh;
+	overflow: hidden;
+	margin: 0 auto;
+	max-width: $mw + 20px;
+	padding: 0px 10px;
+
+	&::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 80px;
+		background-color: white;
+		z-index: 1;
+	}
+}
