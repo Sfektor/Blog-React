@@ -1,76 +1,38 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import cls from "./pagination.module.scss";
 import { useSelector } from "react-redux";
-import { getPageCount, getPageArray } from "../../utils/pagination";
 import { useActions } from "../../hooks/useAction";
+import { Pagination as Pagi, ConfigProvider } from "antd";
+import "./paginationAntd.css";
 
 const Pagination = () => {
   const state = useSelector((state) => state.articles);
-
-  const allPage = getPageCount(state.articlesCount, state.articles.length);
-  const pageArray = getPageArray(allPage);
-  const [pageActive, setPageActive] = useState(state.page);
   const { getPage } = useActions();
-
-  useEffect(() => {
-    getPage(pageActive);
-  }, [getPage, pageActive]);
-
-  const leftArrow = () => {
-    return (
-      <span>
-        <button
-          href="/#"
-          className={`${cls["body__arrow-prev"]} ${
-            pageActive === 1 ? "" : cls["body__arrow-active"]
-          }`}
-          onClick={() => {
-            if (pageActive === 1) return;
-            setPageActive(pageActive - 1);
-          }}
-        >
-          ˂
-        </button>
-      </span>
-    );
+  const getPageCount = (articlesCount, limit) => {
+    return Math.ceil(articlesCount / limit - 1) * 10;
   };
-  const rightArrow = () => {
-    return (
-      <span>
-        <button
-          href="/#"
-          className={`${cls["body__arrow-next"]} ${
-            pageActive === allPage ? "" : cls["body__arrow-active"]
-          }`}
-          onClick={() => {
-            if (pageActive === allPage) return;
-            setPageActive(pageActive + 1);
-          }}
-        >
-          ˃
-        </button>
-      </span>
-    );
-  };
-  const pageNumber = pageArray.map((el) => (
-    <span key={el}>
-      <button
-        onClick={() => setPageActive(el)}
-        href="/#"
-        className={`${cls["body__num"]} ${
-          el === pageActive ? cls["body__num-active"] : ""
-        }`}
-      >
-        {el}
-      </button>
-    </span>
-  ));
 
   return (
     <div className={cls.body}>
-      {leftArrow()}
-      {pageNumber}
-      {rightArrow()}
+      <ConfigProvider
+        theme={{
+          token: {
+            colorPrimary: "#fff",
+          },
+          components: {
+            Pagination: {
+              itemActiveBg: "#1890FF",
+            },
+          },
+        }}
+      >
+        <Pagi
+          total={getPageCount(state.articlesCount, 5)}
+          current={state.page}
+          showSizeChanger={false}
+          onChange={getPage}
+        />
+      </ConfigProvider>
     </div>
   );
 };

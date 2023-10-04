@@ -38,6 +38,15 @@
 	& span {
 		margin-left: 15px;
 		font-size: 12px;
+
+		&:last-child {
+			margin-left: 5px;
+		}
+	}
+
+	&__like {
+		display: flex;
+		align-items: center;
 	}
 }
 
@@ -45,6 +54,19 @@
 	display: flex;
 	margin-top: 5px;
 	min-height: 10px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	position: relative;
+
+	::before {
+		content: '';
+		position: absolute;
+		width: 10px;
+		height: 20px;
+		top: 0;
+		right: 0;
+		background: linear-gradient(270deg, hsla(0, 0%, 97%, 0.137) 16.84%, rgba(248, 248, 248, 0.0001) 100%);
+	}
 
 	&__tag {
 		border-radius: 2px;

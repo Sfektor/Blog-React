@@ -1,0 +1,42 @@
+@import '../../app/vars';
+
+.body {
+	height: 100%;
+	width: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	background: rgba($color: #000000, $alpha: 0.5);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	opacity: 0;
+	pointer-events: none;
+	transition: 0.5s;
+
+	&__content {
+		padding: 20px;
+		background: white;
+		border-radius: 12px;
+		display: flex;
+		flex-direction: column;
+		transform: scale(0.5);
+		transition: 0.4s all;
+		font-family: Roboto;
+		font-size: 20px;
+		font-weight: 500;
+
+		&_active {
+			transform: scale(1);
+		}
+
+		a {
+			cursor: pointer !important;
+		}
+	}
+
+	&_active {
+		opacity: 1;
+		pointer-events: all;
+	}
+}

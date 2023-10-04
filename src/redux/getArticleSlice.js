@@ -5,7 +5,13 @@ export const fetchArticle = createAsyncThunk(
   async function (slug, { rejectWithValue }) {
     try {
       const response = await fetch(
-        `https://blog.kata.academy/api/articles/${slug}`
+        `https://blog.kata.academy/api/articles/${slug}`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Token ${JSON.parse(localStorage.getItem("Token"))}`,
+          },
+        }
       );
       if (!response.ok) throw new Error(response.status);
       const data = await response.json();

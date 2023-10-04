@@ -15,18 +15,47 @@
 
 	&__column {
 		font-size: 18px;
+		align-items: center;
 
 		&:last-child {
 			display: flex;
 		}
 
-		:first-child {
-			color: #000 !important;
-			text-decoration: none
+		:last-child {
+			margin-left: 15px;
 		}
 
-		:last-child {
-			margin-left: 10px;
+		& a {
+			color: #000 !important;
+			cursor: pointer !important;
+			text-decoration: none !important;
 		}
+	}
+}
+
+.user {
+	display: flex;
+	align-items: center;
+	margin: 0px 25px 0px 25px;
+
+	&__name {
+		font-size: 18px;
+		line-height: 155%;
+		text-align: end;
+		overflow: hidden;
+		max-width: 154px;
+		text-overflow: ellipsis;
+	}
+
+	&__logo {
+		margin-left: -15px !important;
+
+		img {
+
+			width: 46px;
+			height: 46px;
+			border-radius: 50%;
+		}
+
 	}
 }

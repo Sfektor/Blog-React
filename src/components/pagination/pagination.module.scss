@@ -9,38 +9,4 @@
 	:not(:last-child) {
 		margin-right: 20px;
 	}
-
-	&__num {
-		color: rgba(0, 0, 0, 0.75);
-		display: block;
-		padding: 5px 7px;
-		min-width: 27px;
-		background-color: $colorWrapper;
-	}
-
-	&__num-active {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		color: white;
-		border: 1px solid $colorBlue;
-		background-color: $colorBlue;
-		border-radius: 5px;
-	}
-
-	&__arrow-next {
-		padding: 5px 7px;
-		color: rgba(0, 0, 0, 0.35);
-		background-color: $colorWrapper;
-	}
-
-	&__arrow-prev {
-		padding: 5px 7px;
-		color: rgba(0, 0, 0, 0.35);
-		background-color: $colorWrapper;
-	}
-
-	&__arrow-active {
-		color: black
-	}
 }
