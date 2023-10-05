@@ -1,9 +1,13 @@
-import React from "react";
+// Импорт стилей
 import cls from "./pagination.module.scss";
+import "./paginationAntd.css";
+// Импорты react
+import React from "react";
+// Импорты redux
 import { useSelector } from "react-redux";
 import { useActions } from "../../hooks/useAction";
+// Импорт Ant design
 import { Pagination as Pagi, ConfigProvider } from "antd";
-import "./paginationAntd.css";
 
 const Pagination = () => {
   const state = useSelector((state) => state.articles);

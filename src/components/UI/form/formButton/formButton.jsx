@@ -1,6 +1,5 @@
 // Импорт стилей
 import cls from "./formButton.module.scss";
-
 // Импорты react
 import React from "react";
 

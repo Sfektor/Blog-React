@@ -1,0 +1,50 @@
+.body {
+	margin-top: 20px
+}
+
+.input-text {
+	margin-bottom: 20px;
+}
+
+.inputs-btn-tags {
+	display: flex;
+	align-items: end;
+	margin-bottom: 20px;
+
+	// &__tags {
+	// 	:not(:last-child) {
+	// 		margin-right: 10px;
+	// 	}
+	// }
+
+	&__items {
+		display: flex;
+		align-items: center;
+		margin-right: 10px;
+
+		&:not(:last-child) {
+			margin-bottom: 7.5px;
+
+		}
+
+		&:last-child {
+			margin-right: 20px;
+		}
+
+		input {
+			width: 300px;
+		}
+
+		button {
+			margin-left: 10px;
+		}
+	}
+
+	&__title {
+		color: #262626;
+		font-family: Roboto;
+		font-size: 14px;
+		line-height: 157.143%;
+		margin-bottom: 2px;
+	}
+}

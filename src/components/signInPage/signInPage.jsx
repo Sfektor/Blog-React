@@ -8,8 +8,7 @@ import FormButton from "../UI/form/formButton/formButton";
 import ErrorMessage from "../UI/form/errorMessage/errorMessage";
 import { rulesEmail, rulesPassword } from "../UI/form/rulesForm/rulesForm";
 // Импорты router
-import { Link } from "react-router-dom";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 // Импорты react hook form
 import { Controller, useForm } from "react-hook-form";
 // Импорты redux

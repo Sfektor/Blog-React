@@ -4,7 +4,10 @@ import { reducer as articleReducer } from "./getArticleSlice";
 import { reducer as postRegistrationReducer } from "./postRegistrationSlice";
 import { reducer as postAuthorizationReducer } from "./postAuthorizationSlice";
 import { reducer as putEditUser } from "./putEditUserSlice";
-import { reducer as likeArticle } from "./likeArticleSlice";
+// import { reducer as likeArticle } from "./likeArticleSlice";
+import { reducer as postArticle } from "./postArticleSlice";
+import { reducer as deleteArticle } from "./deleteArticleSlice";
+import { reducer as editArticle } from "./putEditArticleSlice";
 
 const redusers = combineReducers({
   articles: articlesReducer,
@@ -12,7 +15,10 @@ const redusers = combineReducers({
   regisration: postRegistrationReducer,
   authorization: postAuthorizationReducer,
   edit: putEditUser,
-  like: likeArticle,
+  // like: likeArticle,
+  postArticle: postArticle,
+  deleteArticle: deleteArticle,
+  editArticle: editArticle,
 });
 
 export default configureStore({

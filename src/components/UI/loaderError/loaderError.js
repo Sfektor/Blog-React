@@ -1,3 +1,4 @@
+// Импорт стилей
 import cls from "./loaderError.module.scss";
 
 const LoaderError = () => {

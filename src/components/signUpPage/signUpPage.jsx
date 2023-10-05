@@ -13,18 +13,20 @@ import {
 } from "../UI/form/rulesForm/rulesForm";
 import Modal from "../UI/modal/modal";
 // Импорты router
-import { Link } from "react-router-dom";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 // Импорты react hook form
 import { Controller, useForm } from "react-hook-form";
 // Импорты redux
 import { useSelector, useDispatch } from "react-redux";
 import { regNewUser } from "../../redux/postRegistrationSlice";
+// свои хуки
+import { useActions } from "../../hooks/useAction";
 
 function SignUpPage(props) {
   const { regisration } = useSelector((data) => data);
   const dispatch = useDispatch();
   const history = useHistory();
+  const { resetStatus } = useActions();
 
   const {
     handleSubmit,
@@ -51,8 +53,9 @@ function SignUpPage(props) {
     localStorage.setItem("Token", JSON.stringify(regisration.token));
     sessionStorage.setItem("Email", JSON.stringify(regisration.email));
     setTimeout(() => {
+      resetStatus();
       history.push("/sign-in");
-    }, 5000);
+    }, 3000);
   }
 
   return (
@@ -166,7 +169,7 @@ function SignUpPage(props) {
         <div>
           {regisration.isError ? (
             <div className={cls.error}>
-              Ошибка! Такой username или email уже занят
+              <p>Ошибка! Username или email уже занят</p>
             </div>
           ) : null}
           <div className={cls.btn}>
@@ -186,7 +189,7 @@ function SignUpPage(props) {
         <Modal visible>
           <p>Регистрация прошла успешно!</p>{" "}
           <p>
-            Через 5 секунд вы будете перенесены на страницу авторизации. Или
+            Через 3 секунды вы будете перенесены на страницу авторизации. Или
             жмите на <Link to="/sign-in">SING IN</Link>
           </p>
         </Modal>

@@ -100,6 +100,7 @@
 
 .user {
 	display: flex;
+	position: relative;
 
 	&__name {
 		font-size: 18px;
@@ -121,5 +122,28 @@
 			border-radius: 50%;
 		}
 
+	}
+}
+
+.btn {
+	display: flex;
+	position: absolute;
+	bottom: -50px;
+	left: -10px;
+
+	:not(:last-child) {
+		margin-right: 10px;
+	}
+
+	:first-child {
+		padding: 6px 12px;
+	}
+
+	a {
+		text-decoration: none;
+
+		button {
+			padding: 6px 18px !important;
+		}
 	}
 }

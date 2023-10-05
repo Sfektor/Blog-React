@@ -1,21 +1,34 @@
 // Импорт стилей
 import cls from "./articlesListPage.module.scss";
 // Импорты react
-import React from "react";
+import React, { useEffect } from "react";
 // Импорты redux
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchArticles } from "../../redux/getArticlesSlice";
 // Внутринние компоненты
 import LoaderSpiner from "../UI/loaderSpiner/loaderSpiner";
 import LoaderError from "../UI/loaderError/loaderError";
-import ArticleCard from "../articleCart/articleCart";
+import InsidesArticle from "../UI/insidesArticle/insidesArticle";
 import Pagination from "../pagination/pagination";
 
-function ArticlesListPage(props) {
+const ArticlesListPage = (props) => {
   const { articles } = useSelector((state) => state);
 
-  const printLoader = articles.isLoad ? <LoaderSpiner /> : null;
-  const printError = articles.isError ? <LoaderError /> : null;
-  const printArticles = !articles.isLoad ? <ArticleCard /> : null;
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchArticles(articles.page));
+  }, [dispatch, articles.page]);
+
+  const data = useSelector((state) => state.articles);
+
+  const printLoader = data.isLoad ? <LoaderSpiner /> : null;
+  const printError = data.isError ? <LoaderError /> : null;
+  const printArticles = data.articles.map((el) => (
+    <InsidesArticle key={el.createdAt} showMiniDescription={true}>
+      {el}
+    </InsidesArticle>
+  ));
+
   return (
     <>
       <div className={cls.body}>
@@ -26,6 +39,6 @@ function ArticlesListPage(props) {
       <Pagination />
     </>
   );
-}
+};
 
 export default ArticlesListPage;

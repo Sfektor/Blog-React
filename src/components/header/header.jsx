@@ -5,8 +5,7 @@ import React from "react";
 // Внутринние компоненты
 import Button from "../UI/button/button";
 // Импорты router
-import { Link } from "react-router-dom";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 // Импорты redux
 import { useSelector } from "react-redux";
 import { useActions } from "../../hooks/useAction";
@@ -27,9 +26,14 @@ const Header = (props) => {
         <div className={cls.body__column}>
           {authorization.isAuth ? (
             <>
-              <Button className="btn btn_green" style={{ padding: "5px 10px" }}>
-                Create article
-              </Button>
+              <Link to="/new-article">
+                <Button
+                  className="btn btn_green"
+                  style={{ padding: "5px 10px" }}
+                >
+                  Create article
+                </Button>
+              </Link>
               <div className={cls.user}>
                 <div className={cls["user__name"]}>
                   <Link to="/profile">{authorization.userName}</Link>
@@ -41,7 +45,7 @@ const Header = (props) => {
                       src={
                         authorization?.image
                           ? authorization?.image
-                          : "https://i.pinimg.com/736x/73/ba/75/73ba7578d9be6778a0c2c14f26f5a1ab--opera-say-what.jpg"
+                          : "https://static.productionready.io/images/smiley-cyrus.jpg"
                       }
                     />
                   </Link>

@@ -1,5 +1,7 @@
-import { Hourglass } from "react-loader-spinner";
+// Импорт стилей
 import cls from "./loaderSpiner.module.scss";
+// Сторонние импорты
+import { Hourglass } from "react-loader-spinner";
 
 function LoaderSpiner() {
   return (

@@ -41,6 +41,9 @@ const registrationNewUser = createSlice({
       state.isLoad = null;
       state.isError = null;
     },
+    resetStatus: (state) => {
+      state.status = null;
+    },
   },
   extraReducers: {
     [regNewUser.pending]: (state) => {

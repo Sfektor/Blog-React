@@ -1,15 +1,22 @@
 // Импорт стилей
 import cls from "./insidesArticle.module.scss";
+// Импорты React
+import React from "react";
 // Внешние импорты
 import { format } from "date-fns";
-// Импорты redux
+// Собственные хуки
 import { useActions } from "../../../hooks/useAction";
 // Импорты router
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 // Импорты redux
 import { useSelector, useDispatch } from "react-redux";
-import { postLikeArticle } from "../../../redux/likeArticleSlice";
-import { useState } from "react";
+import { likeArticles } from "../../../redux/getArticlesSlice";
+import { likeArticle } from "../../../redux/getArticleSlice";
+import { deleteArticle } from "../../../redux/deleteArticleSlice";
+// Внутринние компоненты
+import Button from "../button/button";
+// Импорт ant design
+import { Popconfirm } from "antd";
 
 const Tag = ({ children, ...props }) => (
   <div className={cls["tags__tag"]} {...props}>
@@ -23,24 +30,41 @@ const InsidesArticle = ({ children, ...props }) => {
     if (el.trim().length !== 0 || null)
       return <Tag key={el + Math.random()}>{el}</Tag>;
   });
-  const { getSlug } = useActions();
-  const { authorization, like: llike } = useSelector((data) => data);
-  const dispatch = useDispatch();
 
-  const [like, setLike] = useState(children.favorited);
-  const [favoritesCount, setFavoritesCount] = useState(children.favoritesCount);
+  const history = useHistory();
+  const { getSlug, resetStatusDeleteArticle } = useActions();
+
+  const {
+    authorization,
+    like: llike,
+    article,
+    ...data
+  } = useSelector((data) => data);
+  const dispatch = useDispatch();
 
   const liked = () => {
     if (authorization.isAuth) {
-      dispatch(postLikeArticle(children));
-      if (llike.status === "resolved") {
-        like
-          ? setFavoritesCount(favoritesCount - 1)
-          : setFavoritesCount(favoritesCount + 1);
-        setLike(!like);
-      }
+      if (props.one) dispatch(likeArticle(children));
+      dispatch(likeArticles(children));
     }
   };
+
+  if (props.buttonEditDelite) {
+    const articl = {
+      title: article?.article?.title || "",
+      description: article?.article?.description || "",
+      body: article?.article?.body || "",
+      tagList: article?.article?.tagList || "",
+    };
+    localStorage.setItem("article", JSON.stringify(articl));
+  }
+
+  if (data.deleteArticle.status) {
+    setTimeout(() => {
+      resetStatusDeleteArticle();
+      history.push("/articles");
+    }, 0);
+  }
 
   return (
     <div className={cls.body}>
@@ -60,7 +84,7 @@ const InsidesArticle = ({ children, ...props }) => {
               style={authorization.isAuth && { cursor: "pointer" }}
               onClick={liked}
             >
-              {!like ? (
+              {!children.favorited ? (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
@@ -96,7 +120,7 @@ const InsidesArticle = ({ children, ...props }) => {
                 </svg>
               )}
             </span>
-            <span className={cls.title__like}>{favoritesCount}</span>
+            <span className={cls.title__like}>{children.favoritesCount}</span>
           </div>
           <div className={cls.tags}>{tag}</div>
           <div className={props.showMiniDescription ? cls.textmini : cls.text}>
@@ -107,7 +131,7 @@ const InsidesArticle = ({ children, ...props }) => {
           <div className={cls.user}>
             <div>
               <div className={cls["user__name"]}>
-                {children.author.username}
+                {children?.author?.username}
               </div>
               <div className={cls["user__date"]}>
                 {format(
@@ -115,6 +139,24 @@ const InsidesArticle = ({ children, ...props }) => {
                   "MMMM dd, yyyy"
                 )}
               </div>
+              {props.buttonEditDelite ? (
+                <div className={cls.btn}>
+                  <Popconfirm
+                    title="Are you sure to delete this article?"
+                    // description="Are you sure to delete this article?"
+                    onConfirm={() => dispatch(deleteArticle(children.slug))}
+                    onCancel={() => {}}
+                    okText="Yes"
+                    cancelText="No"
+                    placement={"right"}
+                  >
+                    <Button className="btn btn_red">Delete</Button>
+                  </Popconfirm>
+                  <Link to={`/articles/${article.article.slug}/edit`}>
+                    <Button className="btn btn_green">Edit</Button>
+                  </Link>
+                </div>
+              ) : null}
             </div>
             <div className={cls["user__logo"]}>
               <img alt="logo" src={children.author.image} />
