@@ -95,7 +95,9 @@ const SignInPage = (props) => {
           </div>
         ) : null}
         <div className={cls.btn}>
-          <FormButton type="submit">Login</FormButton>
+          <FormButton dis={authorization.status === "pending"} type="submit">
+            Login
+          </FormButton>
         </div>
         <div className={cls.info}>
           Don’t have an account?

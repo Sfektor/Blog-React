@@ -23,11 +23,13 @@ const ArticlesListPage = (props) => {
 
   const printLoader = data.isLoad ? <LoaderSpiner /> : null;
   const printError = data.isError ? <LoaderError /> : null;
-  const printArticles = data.articles.map((el) => (
-    <InsidesArticle key={el.createdAt} showMiniDescription={true}>
-      {el}
-    </InsidesArticle>
-  ));
+  const printArticles = !data.isLoad
+    ? data.articles.map((el) => (
+        <InsidesArticle key={el.createdAt} showMiniDescription={true}>
+          {el}
+        </InsidesArticle>
+      ))
+    : null;
 
   return (
     <>

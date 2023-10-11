@@ -31,11 +31,6 @@ const initialState = {
 const deleteArticleSlice = createSlice({
   name: "deleteArticle",
   initialState,
-  reducers: {
-    resetStatusDeleteArticle: (state) => {
-      state.status = null;
-    },
-  },
   extraReducers: {
     [deleteArticle.pending]: (state) => {
       state.status = "pending";
@@ -53,7 +48,5 @@ const deleteArticleSlice = createSlice({
     },
   },
 });
-
-const resetStatusDeleteArticle = deleteArticleSlice.actions;
 
 export const { actions, reducer } = deleteArticleSlice;

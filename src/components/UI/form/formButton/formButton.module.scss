@@ -11,11 +11,15 @@
 	align-items: center;
 	width: 100%;
 	border-radius: 4px;
-	background: $colorBlue;
 	padding: 8px 16px;
 	font-family: Roboto;
 	font-size: 16px;
 	line-height: 150%;
 	color: white;
 	background-color: $colorBlue;
+
+	&_dis {
+		background-color: grey;
+		cursor: not-allowed;
+	}
 }

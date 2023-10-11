@@ -62,7 +62,7 @@ const InsidesCreateEditArticle = (props) => {
     else dispatch(postArticle(res));
   };
 
-  if (article.status || data.editArticle.status === "resolved") {
+  if (article.status === "resolved" || data.editArticle.status === "resolved") {
     setTimeout(() => {
       resetStatusPostArticle();
       resetStatusEditArticle();
@@ -167,10 +167,19 @@ const InsidesCreateEditArticle = (props) => {
             Что-то пошло не так. Попробуйте создать статью позже
           </ErrorMessage>
         ) : null}
-        <FormButton style={{ width: "400px" }}>Send</FormButton>
+        <FormButton
+          dis={
+            article.status === "pending" ||
+            data.editArticle.status === "pending"
+          }
+          style={{ width: "400px" }}
+        >
+          Send
+        </FormButton>
       </form>
 
-      {article.status || data.editArticle.status === "resolved" ? (
+      {article.status === "resolved" ||
+      data.editArticle.status === "resolved" ? (
         <Modal visible>
           <p>Статья готова!</p>
         </Modal>

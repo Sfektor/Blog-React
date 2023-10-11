@@ -173,7 +173,9 @@ function SignUpPage(props) {
             </div>
           ) : null}
           <div className={cls.btn}>
-            <FormButton type="submit">Create</FormButton>
+            <FormButton dis={regisration.status === "pending"} type="submit">
+              Create
+            </FormButton>
           </div>
 
           <div className={cls.info}>
